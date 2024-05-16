@@ -169,6 +169,35 @@ public class Vuelos {
 		        .collect(Collectors.toCollection(TreeSet::new));
     }
     
+    // 5. Usa el método collect junto con la clase Collectors para los siguientes ejercicios que ya hemos resuelto de otra manera:
+    // 5a. Dada una fecha, cuántos vuelos hay ese día 
+    public Long numDestinosFechaCollect(LocalDate f) {
+    	return vuelos.stream()
+    			.filter(x -> x.getFecha().equals(f))
+    			.collect(Collectors.counting());
+    }
+    
+    // 5b. Dado un mes como un entero devuelve el precio medio de los vuelos de ese mes
+    public Double precioMedioMesCollect(Integer numMes) {
+    	return vuelos.stream()
+    			.filter(x -> x.getFecha().getMonthValue() == numMes)
+    			.collect(Collectors.averagingDouble(Vuelo::getPrecio));
+    }
+    
+    // 5c. Dado un año como un entero devuelve la recaudación de los vuelos de ese año
+    public Double recaudacionUnAnhoCollect(Integer anho) {
+    	return vuelos.stream()
+    			.filter(x -> x.getFecha().getYear() == anho)
+    			.collect(Collectors.summingDouble(x -> x.getPrecio() * x.getNumPasajeros()));
+    }
+    
+    // 5d. Devuelve el Vuelo con mayor número de pasajeros
+    public Vuelo mayorNumPasajerosCollect() {
+    	return vuelos.stream()
+    			.collect(Collectors.maxBy(Comparator.comparing(Vuelo::getNumPasajeros)))
+    	        .orElse(null);
+    }
+    
     @Override
     public String toString() {
         return vuelos.stream().map(Vuelo::toString).collect(Collectors.joining("\n"));
