@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import aeropuerto.FactoriaVuelos;
@@ -20,7 +21,7 @@ public class TestVuelos {
 
 		// testBloque4(vuelos);
 		// testBloque5(vuelos);
-		// testBloque6(vuelos);
+		testBloque6(vuelos);
 	}
 
 	private static void testBloque4(Vuelos vuelos) {
@@ -198,7 +199,7 @@ public class TestVuelos {
 
 		// EJ 5.6
 		System.out.println("===testGetFechasPorDestino ==========\n" + "\tLas fechas por destino es");
-		Map<String, Set<LocalDate>> fechasDestino = vuelos.getFechasPorDestino ();
+		Map<String, Set<LocalDate>> fechasDestino = vuelos.getFechasPorDestino();
 
 		for (Map.Entry<String, Set<LocalDate>> entry : fechasDestino.entrySet()) {
 			String destino = entry.getKey();
@@ -211,5 +212,102 @@ public class TestVuelos {
 	private static void testBloque6(Vuelos vuelos) {
 		System.out.println("BLOQUE 6");
 
+		// EJ 1
+		System.out
+				.println("\n===testGetVueloMasBaratoPorDestino1 ==========" + "\n\tEl vuelo más barato por destino es");
+		Map<String, Optional<Vuelo>> vueloBaratoPorDestino1 = vuelos.getVueloMasBaratoPorDestino1();
+
+		for (Map.Entry<String, Optional<Vuelo>> entry : vueloBaratoPorDestino1.entrySet()) {
+			String destino = entry.getKey();
+			Optional<Vuelo> vuelo = entry.getValue();
+
+			System.out.println("\t\t" + destino + "= " + vuelo);
+
+		}
+
+		// EJ 2
+		System.out
+				.println("\n===testGetVueloMasBaratoPorDestino2 ==========" + "\n\tEl vuelo más barato por destino es");
+		Map<String, Vuelo> vueloBaratoPorDestino2 = vuelos.getVueloMasBaratoPorDestino2();
+
+		for (Map.Entry<String, Vuelo> entry : vueloBaratoPorDestino2.entrySet()) {
+			String destino = entry.getKey();
+			Vuelo vuelo = entry.getValue();
+
+			System.out.println("\t\t" + destino + "= " + vuelo);
+
+		}
+
+		// EJ 3
+		System.out.println(
+				"\n===testGetCodigoVueloMasBaratoPorDestino ==========" + "\n\tEl vuelo más barato por destino es");
+		Map<String, String> codigoVueloMasBaratoPorDestino = vuelos.getCodigoVueloMasBaratoPorDestino();
+
+		for (Map.Entry<String, String> entry : codigoVueloMasBaratoPorDestino.entrySet()) {
+			String destino = entry.getKey();
+			String codigo = entry.getValue();
+
+			System.out.println("\t\t" + destino + "= " + codigo);
+
+		}
+
+		// EJ 4
+		System.out.println("\n===testGetDestinoMasVuelos ==========" + "\n\tEl destino con más vuelos es "
+				+ vuelos.getDestinoMasVuelos());
+
+		// EJ 5
+		System.out.println("\n===testGetSegundoDestinoMasVuelos =========="
+				+ "\n\tEl segundo destino con más vuelos es " + vuelos.getSegundoDestinoMasVuelos());
+
+		// EJ 6
+		System.out.println("\n===testGetNumPlazasPorDestino ==========" + "\n\tEl número de plazas por destino es");
+		Map<String, Integer> numPlazasDestino = vuelos.getNumPlazasPorDestino6();
+
+		for (Map.Entry<String, Integer> entry : numPlazasDestino.entrySet()) {
+			String destino = entry.getKey();
+			Integer numPLazas = entry.getValue();
+
+			System.out.println("\t\t" + destino + "= " + numPLazas);
+
+		}
+
+		// EJ 7
+		System.out.println(
+				"\n===testGetPorcentajePlazasPorDestino ==========" + "\n\tEl porcentaje de plazas por destino es");
+		Map<String, Double> porcentajePlazasDestino = vuelos.getPorcentajePlazasPorDestino();
+
+		for (Map.Entry<String, Double> entry : porcentajePlazasDestino.entrySet()) {
+			String destino = entry.getKey();
+			Double porcentaje = entry.getValue();
+
+			System.out.println("\t\t" + destino + "= " + porcentaje);
+
+		}
+
+		// EJ 8
+		System.out.println("\n===testGetVueloMasBaratoPorDestino =========="
+				+ "\n\tEl vuelo más barato por destino es");
+		Map<String, Vuelo> vueloBaratoDestino = vuelos.getVueloMasBaratoPorDestino();
+
+		for (Map.Entry<String, Vuelo> entry : vueloBaratoDestino.entrySet()) {
+			String destino = entry.getKey();
+			Vuelo v = entry.getValue();
+
+			System.out.println("\t\t" + destino + "= " + v);
+
+		}
+
+		// EJ 9
+		System.out.println("\n===testGetNumPasajerosPorDestinoDeAnyo =========="
+				+ "\n\tEl numero de pasajeros por destino en el año 2023 es");
+		Map<String, Integer> pasajerosDestinoAnyo = vuelos.getNumPasajerosPorDestinoDeAnyo(2023);
+
+		for (Map.Entry<String, Integer> entry : pasajerosDestinoAnyo.entrySet()) {
+			String destino = entry.getKey();
+			Integer num = entry.getValue();
+
+			System.out.println("\t\t" + destino + "= " + num);
+
+		}
 	}
 }
