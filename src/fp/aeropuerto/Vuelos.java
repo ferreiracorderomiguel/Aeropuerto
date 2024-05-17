@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
@@ -196,6 +197,47 @@ public class Vuelos {
     	return vuelos.stream()
     			.collect(Collectors.maxBy(Comparator.comparing(Vuelo::getNumPasajeros)))
     	        .orElse(null);
+    }
+    
+    // 5 pero con Maps
+    // 5.1. Devuelve un Map que a cada fecha le haga corresponder una lista con sus vuelos
+    private Map<LocalDate, List<Vuelo>> listaVuelosFecha() {
+    	return vuelos.stream()
+    			.collect(Collectors.groupingBy(Vuelo::getFecha));
+    }
+    
+    // 5.2. Devuelve un Map que a cada fecha le haga corresponder un conjunto con sus vuelos
+    private Map<LocalDate, Set<Vuelo>> conjuntoVuelosFecha() {
+    	return vuelos.stream()
+    	        .collect(Collectors.groupingBy(Vuelo::getFecha, Collectors.toSet()));
+    }
+    
+    // 5.3. Devuelve un Map que a cada fecha le haga corresponder el número de vuelos
+    private Map<LocalDate, Long> numVuelosPorFecha() {
+    	return vuelos.stream()
+    			.collect(Collectors.groupingBy(Vuelo::getFecha, 
+    					Collectors.counting()));
+    }
+    
+    // 5.4. Devuelve un Map que a cada destino le haga corresponder el número total de plazas
+    private Map<String, Integer> numPlazasPorDestino() {
+    	return vuelos.stream()
+    			.collect(Collectors.groupingBy(Vuelo::getDestino,
+    					Collectors.summingInt(Vuelo::getNumPlazas)));
+    }
+    
+    // 5. 5.Devuelve un Map que a cada destino le haga corresponder el precio medio de sus vuelos
+    private Map<String, Double> precioMedioDestino() {
+    	return vuelos.stream()
+    			.collect(Collectors.groupingBy(Vuelo::getDestino,
+    					Collectors.averagingDouble(Vuelo::getPrecio)));
+    }
+    
+    // 5. 6.Devuelve un Map que a cada destino le haga corresponder un conjunto con las fechas de los vuelos a ese destino
+    private Map<String, Set<LocalDate>> fechasPorDestino() {
+    	return vuelos.stream()
+    			.collect(Collectors.groupingBy(Vuelo::getDestino,
+    					Collectors.mapping(Vuelo::getFecha, Collectors.toSet())));
     }
     
     @Override
