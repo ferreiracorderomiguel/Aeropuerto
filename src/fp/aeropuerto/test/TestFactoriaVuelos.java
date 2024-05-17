@@ -12,8 +12,6 @@ public class TestFactoriaVuelos {
 		vuelos.stream()
 			.forEach(System.out::println);
 		String msg = String.format("Se han leido %d vuelos", vuelos.size());
-		System.out.println(msg);
-			
-				
+		System.out.println(msg);				
 	}
 }

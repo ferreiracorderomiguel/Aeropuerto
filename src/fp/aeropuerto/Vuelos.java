@@ -45,7 +45,7 @@ public class Vuelos {
         return (int) vuelos.stream().map(Vuelo::getDestino).distinct().count();
     }
     
-    // Bloque 4
+    // BLOQUE 4
     // 1. Dado un destino, existe algún vuelo con ese destino
     public Boolean exiteAlgunVuelo(String destino) {
     	return vuelos.stream()
@@ -66,7 +66,7 @@ public class Vuelos {
     }
     
     // 4. Dada una fecha devuelve una lista con los vuelos posteriores a esa fecha.
-    public List<Vuelo> listaVuelosPosteriores (LocalDate fecha) {
+    public List<Vuelo> listaVuelosPosteriores(LocalDate fecha) {
     	return vuelos.stream()
     			.filter(x -> x.getFecha().isAfter(fecha))
     			.collect(Collectors.toList());
@@ -84,8 +84,8 @@ public class Vuelos {
     public Long numPasajerosEnDestinos(Set<String> destinos) {
     	return vuelos.stream()
     			.filter(x -> destinos.contains(x.getDestino()))
-    			.map(Vuelo::getNumPasajeros)
-    			.count();
+    			.mapToLong(Vuelo::getNumPasajeros)
+    			.sum();
     }
     
     // 7. Dado un mes como un entero devuelve el precio medio de los vuelos de ese mes.
@@ -98,7 +98,7 @@ public class Vuelos {
     }
     
     // 8. Dado un año como un entero devuelve la recaudación de los vuelos de ese año. Suponga que todos los pasajeros pagan el mismo precio.
-    public Double recaudacionUnAnho(Integer anho) {
+    public Double getRecaudacion(Integer anho) {
     	return vuelos.stream()
     			.filter(x -> x.getFecha().getYear() == anho)
     			.mapToDouble(x -> x.getPrecio() * x.getNumPasajeros())
@@ -106,7 +106,7 @@ public class Vuelos {
     }
     
     // 9. Devuelve el vuelo con mayor número de pasajeros. Si no se puede calcular devuelve null.
-    public Vuelo mayorNumPasajeros() {
+    public Vuelo getVueloMasPasajeros () {
     	return vuelos.stream()
     			.max(Comparator.comparing(Vuelo::getNumPasajeros))
     			.orElse(null);
@@ -114,7 +114,7 @@ public class Vuelos {
     
     
     // 10.Dado un destino devuelve el código del vuelo de menor precio que vuela a ese destino. Eleva NoSuchElementException si no se puede calcular.
-    public String codMenorPrecio(String destino) {
+    public String getCodigoVueloMenorPrecio(String destino) {
     	return vuelos.stream()
     			.filter(x -> x.getDestino().equals(destino))
     			.min(Comparator.comparing(Vuelo::getPrecio))
@@ -123,7 +123,7 @@ public class Vuelos {
     }
     
     // 11.Dado un número n devuelve una lista con los n vuelos más baratos.
-    public List<Vuelo> nVuelosMasBaratos(int n) {
+    public List<Vuelo> getNVuelosMasBaratos(int n) {
     	return vuelos.stream()
     			.sorted(Comparator.comparing(Vuelo::getPrecio))
     			.limit(n)
@@ -131,14 +131,14 @@ public class Vuelos {
     }
     
     // 12.Dado un número n devuelve una lista con los n vuelos de mayor duración.
-    public List<Vuelo> nVuelosMayorDuracion(int n) {
+    public List<Vuelo> getNVuelosMasDuracion(int n) {
     	return vuelos.stream()
     			.sorted(Comparator.comparing(Vuelo::getDuracion).reversed())
     			.limit(n)
     			.collect(Collectors.toList());
     }
     
-    // Bloque 5
+    // BLOQUE 5
     // 1. Dada una fecha f devuelve el número de destinos diferentes de todos los vuelos de fecha
     public Long numDestinosFecha(LocalDate f) {
     	return vuelos.stream()
@@ -239,6 +239,8 @@ public class Vuelos {
     			.collect(Collectors.groupingBy(Vuelo::getDestino,
     					Collectors.mapping(Vuelo::getFecha, Collectors.toSet())));
     }
+    
+    // BLOQUE 6
     
     @Override
     public String toString() {
