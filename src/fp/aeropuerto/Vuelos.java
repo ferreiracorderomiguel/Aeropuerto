@@ -7,7 +7,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -214,7 +216,67 @@ public class Vuelos {
 	}
 
 	// BLOQUE 6
+	// 1. Método que devuelve un Map tal que a cada destino le hace corresponder un
+	// Optional con el vuelo más barato a ese destino.
+	public Map<String, Optional<Vuelo>> getVueloMasBaratoPorDestino1() {
+		return null;
+	}
+	
+	// 2. Método que devuelve un Map tal que a cada destino le hace corresponder un Vuelo con el vuelo más barato a ese destino.
+	public Map<String, Vuelo> getVueloMasBaratoPorDestino2() {
+		return null;
+	}
+	
+	// 3. Método que devuelve un Map tal que a cada destino le hace corresponder el código del Vuelo con el vuelo más barato a ese destino.
+	public Map<String, String> getCodigoVueloMasBaratoPorDestino() {
+		return null;
+	}
+	
+	// 4. Método que devuelve el destino con más vuelos. Si no se puede calcular eleva NoSuchElementException.
+	public String getDestinoMasVuelos() {
+		return null;
+	}
+	
+	// 5. Método que devuelve cuál es el segundo destino con más vuelos. Si no se puede calcular eleva NoSuchElementException.
+	public String getSegundoDestinoMasVuelos() {
+		return null;
+	}
 
+	// 6. Método que haga corresponder a cada destino el número total de plazas de los vuelos a ese destino. Usa `Collectors.toMap` para resolverlo.
+	public Map<String, Integer> getNumPlazasPorDestino6() {
+		return null;
+	}
+	
+	// 7. Método que devuelve un Map que a cada destino le haga corresponder el porcentaje de plazas de los vuelos a ese destino con respecto al total de plazas.
+	public Map<String, Double> getPorcentajePlazasPorDestino() {
+		return null;
+	}
+	
+	// 8. Método que haga corresponder a cada destino el vuelo más barato a ese destino. Usa `Collectors.toMap` para resolverlo.
+	public Map<String, Vuelo> getVueloMasBaratoPorDestino() {
+		return null;
+	}
+	
+	// 9. Método que dado un entero que representa un año devuelve un SortedMap que relacione cada destino con el total de pasajeros a ese destino en el año dado como parámetro.
+	public SortedMap<String, Integer> getNumPasajerosPorDestinoDeAnyo(Integer anyo) {
+		return null;
+	}
+	
+	// 10. Método que devuelve un Map tal que dado un entero n haga corresponder a cada fecha la lista de los n destinos distintos de los vuelos de mayor duración.
+	public Map<LocalDate, List<String>> getNDestinosMayorDuracionPorFecha(Integer n) {
+		return null;
+	}
+	
+	// 11. Método que devuelve un Map que a cada fecha le haga corresponder una lista de vuelos ordenada por precio.
+	public Map<LocalDate, List<Vuelo>> getDestinosOrdenadosPorPrecioPorFecha() {
+		return null;
+	}
+	
+	// 12. Método que dado un número entero n devuelve un conjunto con los destinos que están entre los n destinos con más vuelos.
+	public Set<String> getNDestinosMasVuelos(Integer n) {
+		return null;
+	}
+	
 	@Override
 	public String toString() {
 		return vuelos.stream().map(Vuelo::toString).collect(Collectors.joining("\n"));

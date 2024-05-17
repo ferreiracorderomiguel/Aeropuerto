@@ -19,11 +19,12 @@ public class TestVuelos {
 		Vuelos vuelos = new Vuelos("Contenedor vuelos", listaVuelos);
 
 		// testBloque4(vuelos);
-		testBloque5(vuelos);
+		// testBloque5(vuelos);
 		// testBloque6(vuelos);
 	}
 
 	private static void testBloque4(Vuelos vuelos) {
+		System.out.println("BLOQUE 4");
 		// EJ 1
 		System.out.println("===testExisteVueloDestino ==========\n"
 				+ "\t¿Hay algún vuelo con destino Madrid pasajeros? " + vuelos.exiteAlgunVuelo("Madrid") + "\n");
@@ -88,6 +89,7 @@ public class TestVuelos {
 	}
 
 	private static void testBloque5(Vuelos vuelos) {
+		System.out.println("BLOQUE 5");
 		// EJ 1
 		System.out.println("===testGetNumDestinosDiferentesFecha ==========\n" + "\tHay "
 				+ vuelos.getNumDestinosDiferentesFecha(LocalDate.parse("2023-06-04"))
@@ -207,7 +209,7 @@ public class TestVuelos {
 	}
 
 	private static void testBloque6(Vuelos vuelos) {
-		// TODO Auto-generated method stub
+		System.out.println("BLOQUE 6");
 
 	}
 }
