@@ -11,6 +11,7 @@ import java.util.Set;
 import aeropuerto.FactoriaVuelos;
 import aeropuerto.Vuelo;
 import aeropuerto.Vuelos;
+import aeropuerto.VuelosRepaso;
 
 public class TestVuelos {
 
@@ -21,10 +22,11 @@ public class TestVuelos {
 
 		// testBloque4(vuelos);
 		// testBloque5(vuelos);
-		testBloque6(vuelos);
+		// testBloque6(vuelos);
+		testBloque7(vuelos);
 	}
 
-	private static void testBloque4(Vuelos vuelos) {
+	private static void testBloque4(VuelosRepaso vuelos) {
 		System.out.println("BLOQUE 4");
 		// EJ 1
 		System.out.println("===testExisteVueloDestino ==========\n"
@@ -309,5 +311,23 @@ public class TestVuelos {
 			System.out.println("\t\t" + destino + "= " + num);
 
 		}
+	}
+
+	private static void testBloque7(Vuelos vuelos) {
+		System.out.println("BLOQUE 6");
+		
+		System.out.println("\nEJERCICIO 01=======================\r\n"
+				+ "===testDuracionTotalVuelosDestino ==========");
+		System.out.println("La duración total de los vuelos al destino Madrid es " + vuelos.getDuracionTotalVuelosDestino("Madrid"));
+		
+		System.out.println("\nEJERCICIO 02=======================\r\n"
+				+ "===testMuestraPrecioMedioDestino ==========");
+		vuelos.muestraPrecioMedioDestino("Madrid");
+		
+		System.out.println("\nEJERCICIO 03=======================\r\n"
+				+ "===testSubePreciosVuelosDestino ==========");
+		System.out.println("Los precios al destino Madrid antes de la subida del 5,00 son:");
+		vuelos.muestraPrecioMedioDestino("Madrid");
+		vuelos.subePreciosVuelosDestino("Madrid", 5.00);
 	}
 }
