@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -384,21 +385,70 @@ public class Vuelos {
 	// 4.Dado el nombre de un fichero implemente un método que escriba en ese fichero
 	// los precios medios de los vuelos por destino, ordenados por orden alfabético de
 	// destino.
+	// ESTO NO LO HEMOS DAU
 	
 	// 5.Implemente un método que devuelva un SortedMap donde las claves son las fechas
 	// de los vuelos y los valores el código del vuelo de ese día con menor tasa de
 	// ocupación.
+	public SortedMap<LocalDate, String> getCodigoVueloMenosOcupadoPorFecha() {
+		return vuelos.stream()
+				.collect(Collectors.groupingBy(Vuelo::getFecha, TreeMap::new,
+						Collectors.collectingAndThen(
+								Collectors.minBy(Comparator.comparing(Vuelo::getPorcentajeOcupacion)),
+			                    optional -> optional.map(Vuelo::getCodigo).orElse(null)
+								)));
+	}
 	
 	// 6.Implemente un método que devuelva una lista con las fechas de los vuelos,
 	// ordenadas por porcentaje de viajeros de cada día con respecto al total de pasajeros.
+	public List<LocalDate> getFechasOrdenadasPorOcupacion() {
+	    double totalPasajeros = vuelos.stream()
+	        .mapToDouble(Vuelo::getNumPasajeros)
+	        .sum();
+
+	    return vuelos.stream()
+	        .collect(Collectors.groupingBy(Vuelo::getFecha, Collectors.summingDouble(Vuelo::getNumPasajeros)))
+	        .entrySet().stream()
+	        .sorted(Comparator.comparing(e -> e.getValue() / totalPasajeros, Comparator.reverseOrder()))
+	        .map(Map.Entry::getKey)
+	        .collect(Collectors.toList());
+	}
 	
 	// 7.Dado un umbral de recaudación implemente un método que devuelva una lista con
 	// los códigos de los vuelos cuya recaudación es superior a la dada como parámetro.
+	public List<String> getCodigosVuelosRecaudacionMayor(Double umbral) {
+		return vuelos.stream()
+				.filter(x -> x.getPrecio() * x.getNumPasajeros() > umbral)
+				.map(Vuelo::getCodigo)
+				.collect(Collectors.toList());
+	}
 	
 	// 8.Implemente un método que devuelva un Map tal que a cada fecha le haga corresponder
 	// una lista ordenada de los códigos de los vuelos en esa fecha. La lista con los código
 	// de los vuelos debe estar ordenada de mayor a menor número de pasajeros.
-
+	public Map<LocalDate, List<String>> getCodigoVuelosOrdenadosPorPasajerosPorFecha() {
+		return vuelos.stream()
+		        .collect(Collectors.groupingBy(Vuelo::getFecha,
+		            Collectors.collectingAndThen(
+		                Collectors.toList(),
+		                list -> {
+		                    list.sort(Comparator.comparing(Vuelo::getNumPasajeros, Comparator.reverseOrder()));
+		                    return list.stream().map(Vuelo::getCodigo).collect(Collectors.toList());
+		                })));
+	}
+	
+	// BLOQUE 8
+	// 1. Implemente un método que devuelva un Map que relacione cada destino con una lista de tres
+	// elementos: el mínimo, la media y el máximo de los precios de los vuelos a ese destino
+	// MUY LOCO PREGUNTAR ESTO
+	
+	// 2. Implemente un método que devuelva un Map en el que a cada destino le haga corresponder
+	// un Boolean que sea True si todos los vuelos a ese destino tienen plazas libres y False en caso contrario.
+	public Map<String, Boolean> getTienenTodosPlazasLibresPorDestino() {
+		return vuelos.stream()
+				.collect(Collectors.groupingBy(Vuelo::getDestino,
+						Collectors.collectingAndThen(Collectors.toList(), list -> list.stream().allMatch(Vuelo::getEstaCompleto))));
+	}
 	
 	
 	@Override

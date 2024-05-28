@@ -23,8 +23,11 @@ public class TestVuelos {
 		// testBloque4(vuelos);
 		// testBloque5(vuelos);
 		// testBloque6(vuelos);
-		testBloque7(vuelos);
+		// testBloque7(vuelos);
+		testBloque8(vuelos);
 	}
+
+	
 
 	private static void testBloque4(VuelosRepaso vuelos) {
 		System.out.println("BLOQUE 4");
@@ -329,5 +332,34 @@ public class TestVuelos {
 		System.out.println("Los precios al destino Madrid antes de la subida del 5,00 son:");
 		vuelos.muestraPrecioMedioDestino("Madrid");
 		vuelos.subePreciosVuelosDestino("Madrid", 5.00);
+		
+		System.out.println("\nEJERCICIO 05=======================\r\n"
+				+ "===testGetCodigoVueloMenosOcupadoPorFecha ==========");
+		
+		for (Map.Entry<LocalDate, String> entry : vuelos.getCodigoVueloMenosOcupadoPorFecha().entrySet()) {
+		    System.out.println(entry.getKey() + "=" + entry.getValue());
+		}
+		
+		System.out.println("\nEJERCICIO 06=======================\r\n"
+				+ "===testGetFechasOrdenadasPorOcupacion ==========");
+		System.out.println(vuelos.getFechasOrdenadasPorOcupacion());
+		
+		System.out.println("\nEJERCICIO 07=======================\r\n"
+				+ "===testGetCodigosVuelosRecaudacionMayor ==========");
+		System.out.println("Los códigos de los vuelos con recaudación superior a  300,00 ");
+		System.out.println(vuelos.getCodigosVuelosRecaudacionMayor(300.0));
+		
+		
+		System.out.println("\nEJERCICIO 08=======================\r\n"
+				+ "===testGetCodigoVuelosOrdenadosPorPasajerosPorFecha ==========");
+		System.out.println("Los códigos de los vuelos más baratos por fecha (ordenados por pasajeros) son");
+		for(Map.Entry<LocalDate, List<String>> m: vuelos.getCodigoVuelosOrdenadosPorPasajerosPorFecha().entrySet()) {
+			System.out.println(m.getKey() + "=" + m.getValue());
+		}
+	}
+	
+	private static void testBloque8(Vuelos vuelos) {
+		// TODO Auto-generated method stub
+		
 	}
 }
